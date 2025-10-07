@@ -707,3 +707,88 @@ body {
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
+.contact-node h3 {
+    font-family: 'Orbitron', monospace;
+    color: #ff0000;
+    margin-bottom: 0.5rem;
+}
+
+.spider-quote-footer {
+    text-align: center;
+    font-family: 'Orbitron', monospace;
+    font-style: italic;
+    color: #ff0000;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .web-text {
+        font-size: 1.2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .experience-grid,
+    .projects-grid,
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-web {
+        gap: 1.5rem;
+    }
+    
+    .skill-node {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .contact-web {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .spider-mask {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
+}
