@@ -432,3 +432,66 @@ body {
     font-size: 1.5rem;
     margin-right: 1rem;
 }
+/* Experience Section */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.experience-card {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    border-color: #ff0000;
+    box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+}
+
+.card-web {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 L90 50 L50 90 L10 50 Z" stroke="%23ff0000" stroke-width="1" fill="none" opacity="0.3"/></svg>');
+    opacity: 0.2;
+}
+
+.experience-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.experience-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    color: #ff0000;
+    margin-bottom: 0.5rem;
+}
+
+.experience-type {
+    color: #0066ff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.web-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #ff0000, #0066ff);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
