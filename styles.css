@@ -495,3 +495,112 @@ body {
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
+.experience-card:hover .web-line {
+    transform: scaleX(1);
+}
+
+/* Skills Section */
+.skills-web {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    position: relative;
+    min-height: 400px;
+}
+
+.skill-node {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.2), rgba(0, 102, 255, 0.2));
+    border: 2px solid #ff0000;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.skill-node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+    border-color: #0066ff;
+}
+
+.skill-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-name {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Projects Section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+    border-color: #ff0000;
+}
+
+.project-web {
+    height: 200px;
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(0, 102, 255, 0.1));
+    position: relative;
+    overflow: hidden;
+}
+
+.project-web::before {
+    content: '🕷️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    opacity: 0.3;
+    animation: projectSpider 4s ease-in-out infinite;
+}
+
+@keyframes projectSpider {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg); }
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content h3 {
+    font-family: 'Orbitron', monospace;
+    color: #ff0000;
+    margin-bottom: 0.5rem;
+}
+
+.project-tech {
+    color: #0066ff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
