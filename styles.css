@@ -227,3 +227,120 @@ body {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
+.spider-text {
+    display: block;
+    background: linear-gradient(45deg, #ff0000, #0066ff, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from { filter: drop-shadow(0 0 10px #ff0000); }
+    to { filter: drop-shadow(0 0 20px #0066ff); }
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #cccccc;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+}
+.stat-label {
+    font-size: 0.9rem;
+    color: #cccccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.web-button {
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    color: #ffffff;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.web-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+}
+
+.web-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.web-button:hover::before {
+    left: 100%;
+}
+
+.web-shooters {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.web-shooter {
+    position: absolute;
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff0000, transparent);
+    animation: webShoot 3s ease-in-out infinite;
+}
+
+.left-shooter {
+    top: 30%;
+    left: -200px;
+    transform: rotate(-30deg);
+}
+
+.right-shooter {
+    top: 70%;
+    right: -200px;
+    transform: rotate(30deg);
+    animation-delay: 1.5s;
+}
+
+@keyframes webShoot {
+    0% { transform: translateX(0) rotate(-30deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(400px) rotate(-30deg); opacity: 0; }
+}
