@@ -164,3 +164,66 @@ body {
         radial-gradient(circle at 40% 60%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
     animation: particleFloat 6s ease-in-out infinite;
 }
+@keyframes particleFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.spider-mask {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #ff0000 0%, #cc0000 50%, #000000 100%);
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    position: relative;
+    animation: maskGlow 3s ease-in-out infinite;
+}
+
+@keyframes maskGlow {
+    0%, 100% { box-shadow: 0 0 20px #ff0000; }
+    50% { box-shadow: 0 0 40px #ff0000, 0 0 60px #ff0000; }
+}
+
+.mask-eyes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 20px;
+}
+
+.eye {
+    width: 25px;
+    height: 35px;
+    background: #ffffff;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: eyeBlink 4s infinite;
+}
+
+@keyframes eyeBlink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+.hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.web-text {
+    display: block;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
