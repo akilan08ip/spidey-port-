@@ -150,3 +150,77 @@ function createWebShot(button) {
         easing: 'ease-out'
     }).onfinish = () => web.remove();
 }
+function createRandomWebShot() {
+    const web = document.createElement('div');
+    web.className = 'random-web-shot';
+    web.style.cssText = `
+        position: fixed;
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.6), transparent);
+        pointer-events: none;
+        z-index: 1;
+    `;
+    
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+    const angle = Math.random() * 360;
+    
+    web.style.left = startX + 'px';
+    web.style.top = startY + 'px';
+    web.style.transform = `rotate(${angle}deg)`;
+    
+    document.body.appendChild(web);
+    
+    // Animate and remove
+    setTimeout(() => {
+        web.style.opacity = '0';
+        web.style.transition = 'opacity 1s ease-out';
+        setTimeout(() => web.remove(), 1000);
+    }, 2000);
+}
+
+// Skills interaction
+function initSkillsInteraction() {
+    const skillNodes = document.querySelectorAll('.skill-node');
+    
+    skillNodes.forEach(node => {
+        node.addEventListener('mouseenter', function() {
+            const skill = this.dataset.skill;
+            const level = this.dataset.level;
+            showSkillTooltip(this, skill, level);
+            createSkillWeb(this);
+        });
+        
+        node.addEventListener('mouseleave', function() {
+            hideSkillTooltip();
+            removeSkillWeb();
+        });
+    });
+}
+
+// Show skill tooltip
+function showSkillTooltip(node, skill, level) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'skill-tooltip';
+    tooltip.innerHTML = `
+        <div class="tooltip-content">
+            <strong>${skill}</strong>
+            <div class="skill-bar">
+                <div class="skill-progress" style="width: ${level}%"></div>
+            </div>
+            <span>${level}%</span>
+        </div>
+    `;
+    
+    tooltip.style.cssText = `
+        position: absolute;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid #ff0000;
+        z-index: 1000;
+        pointer-events: none;
+        transform: translateY(-120px);
+    `;
