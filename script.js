@@ -314,3 +314,192 @@ function removeSkillWeb() {
         setTimeout(() => connection.remove(), 300);
     });
 }
+function animateSkillNode(node) {
+    const level = node.dataset.level;
+    node.style.animation = `skillPulse 1s ease-out`;
+    
+    // Add pulse animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes skillPulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Animate experience card
+function animateExperienceCard(card) {
+    card.style.animation = 'cardSlideIn 0.8s ease-out';
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes cardSlideIn {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Animate project card
+function animateProjectCard(card) {
+    card.style.animation = 'projectSwing 1s ease-out';
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes projectSwing {
+            0% { transform: translateY(50px) rotate(-5deg); opacity: 0; }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Particle effects
+function initParticleEffects() {
+    createFloatingParticles();
+    setInterval(createFloatingParticles, 10000);
+}
+
+// Create floating particles
+function createFloatingParticles() {
+    const particleCount = 15;
+    
+    for (let i = 0; i < particleCount; i++) {
+        setTimeout(() => {
+            createParticle();
+        }, i * 200);
+    }
+}
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'floating-particle';
+    particle.style.cssText = `
+        position: fixed;
+        width: 3px;
+        height: 3px;
+        background: #ff0000;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        box-shadow: 0 0 6px #ff0000;
+    `;
+    
+    const startX = Math.random() * window.innerWidth;
+    const startY = window.innerHeight + 10;
+    
+    particle.style.left = startX + 'px';
+    particle.style.top = startY + 'px';
+    
+    document.body.appendChild(particle);
+    
+    // Animate particle
+    const animation = particle.animate([
+        { 
+            transform: 'translateY(0px) translateX(0px) rotate(0deg)',
+            opacity: 0
+        },
+        { 
+            transform: `translateY(-${window.innerHeight + 100}px) translateX(${(Math.random() - 0.5) * 200}px) rotate(360deg)`,
+            opacity: 1
+        },
+        { 
+            transform: `translateY(-${window.innerHeight + 200}px) translateX(${(Math.random() - 0.5) * 400}px) rotate(720deg)`,
+            opacity: 0
+        }
+    ], {
+        duration: 8000 + Math.random() * 4000,
+        easing: 'linear'
+    });
+    
+    animation.onfinish = () => particle.remove();
+}
+
+// Spider effects
+function initSpiderEffects() {
+    // Add spider cursor trail
+    document.addEventListener('mousemove', createSpiderTrail);
+    
+    // Add web shooting on click
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('button') && !e.target.closest('a')) {
+            createClickWeb(e.clientX, e.clientY);
+        }
+    });
+}
+
+// Create spider trail effect
+function createSpiderTrail(e) {
+    if (Math.random() > 0.95) { // Only create trail occasionally
+        const trail = document.createElement('div');
+        trail.innerHTML = '🕷️';
+        trail.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: spiderTrail 2s ease-out forwards;
+        `;
+        
+        document.body.appendChild(trail);
+        
+        // Add trail animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spiderTrail {
+                0% { opacity: 0.8; transform: scale(1); }
+                100% { opacity: 0; transform: scale(0.5) rotate(180deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        setTimeout(() => trail.remove(), 2000);
+    }
+}
+
+// Create web on click
+function createClickWeb(x, y) {
+    const web = document.createElement('div');
+    web.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        width: 50px;
+        height: 50px;
+        border: 1px solid rgba(255, 0, 0, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1000;
+        animation: clickWeb 1s ease-out forwards;
+    `;
+    
+    document.body.appendChild(web);
+    
+    // Add click web animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes clickWeb {
+            0% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    setTimeout(() => web.remove(), 1000);
+}
+
+// Utility function for smooth scrolling (used by HTML onclick)
+window.scrollToSection = scrollToSection;
+
