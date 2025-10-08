@@ -224,3 +224,93 @@ function showSkillTooltip(node, skill, level) {
         pointer-events: none;
         transform: translateY(-120px);
     `;
+ node.appendChild(tooltip);
+    
+    // Add skill bar styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .skill-bar {
+            width: 100px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #0066ff);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Hide skill tooltip
+function hideSkillTooltip() {
+    const tooltip = document.querySelector('.skill-tooltip');
+    if (tooltip) {
+        tooltip.remove();
+    }
+}
+
+// Create web connection between skills
+function createSkillWeb(activeNode) {
+    const skillsContainer = document.querySelector('.skills-web');
+    const allNodes = document.querySelectorAll('.skill-node');
+    
+    allNodes.forEach(node => {
+        if (node !== activeNode) {
+            const line = document.createElement('div');
+            line.className = 'skill-connection';
+            
+            const rect1 = activeNode.getBoundingClientRect();
+            const rect2 = node.getBoundingClientRect();
+            const containerRect = skillsContainer.getBoundingClientRect();
+            
+            const x1 = rect1.left + rect1.width / 2 - containerRect.left;
+            const y1 = rect1.top + rect1.height / 2 - containerRect.top;
+            const x2 = rect2.left + rect2.width / 2 - containerRect.left;
+            const y2 = rect2.top + rect2.height / 2 - containerRect.top;
+            
+            const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+            const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+            
+            line.style.cssText = `
+                position: absolute;
+                width: ${length}px;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.5), transparent);
+                left: ${x1}px;
+                top: ${y1}px;
+                transform-origin: 0 0;
+                transform: rotate(${angle}deg);
+                pointer-events: none;
+                animation: webGlow 1s ease-in-out;
+            `;
+            
+            skillsContainer.appendChild(line);
+        }
+    });
+    
+    // Add glow animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes webGlow {
+            0% { opacity: 0; transform: rotate(${0}deg) scaleX(0); }
+            100% { opacity: 1; transform: rotate(${0}deg) scaleX(1); }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Remove skill web connections
+function removeSkillWeb() {
+    const connections = document.querySelectorAll('.skill-connection');
+    connections.forEach(connection => {
+        connection.style.opacity = '0';
+        connection.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => connection.remove(), 300);
+    });
+}
